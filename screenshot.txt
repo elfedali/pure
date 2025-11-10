@@ -1,0 +1,9 @@
+Pure WordPress Theme Screenshot
+
+To add a screenshot for your theme:
+1. Create an image file named "screenshot.png"
+2. Recommended size: 1200x900 pixels
+3. Place it in the theme root directory
+4. This will appear in the WordPress theme selector
+
+The screenshot should showcase your theme's design and layout.
