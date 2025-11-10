@@ -59,8 +59,8 @@ if ( ! function_exists( 'pure_theme_setup' ) ) :
         
         // Add custom logo support
         add_theme_support( 'custom-logo', array(
-            'height'      => 100,
-            'width'       => 400,
+            'height'      => 300,
+            'width'       => 300,
             'flex-height' => true,
             'flex-width'  => true,
         ) );

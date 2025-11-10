@@ -1,0 +1,46 @@
+// Theme Variables
+// Primary color and other customizable variables
+
+:root {
+    // Colors
+    --primary-color: #0078e7;
+    --primary-color-dark: #005bb5;
+    --primary-color-light: #4da3ff;
+    
+    --secondary-color: #666;
+    --text-color: #333;
+    --text-light: #666;
+    --border-color: #e5e5e5;
+    --background-color: #fff;
+    --background-light: #f9f9f9;
+    
+    // Hover states
+    --hover-bg: #f0f0f0;
+    
+    // Typography
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-size-base: 16px;
+    --line-height-base: 1.6;
+    
+    // Spacing
+    --spacing-xs: 0.5em;
+    --spacing-sm: 1em;
+    --spacing-md: 1.5em;
+    --spacing-lg: 2em;
+    --spacing-xl: 3em;
+    
+    // Container
+    --container-max-width: 1200px;
+    
+    // Border radius
+    --border-radius-sm: 3px;
+    --border-radius-md: 5px;
+    
+    // Transitions
+    --transition-speed: 0.2s;
+}
+
+// SCSS Variables (for use in calculations)
+$primary-color: var(--primary-color);
+$text-color: var(--text-color);
+$border-color: var(--border-color);

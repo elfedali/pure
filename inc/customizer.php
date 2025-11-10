@@ -33,5 +33,32 @@ function pure_customize_register( $wp_customize ) {
         'section'  => 'pure_footer_section',
         'type'     => 'text',
     ) );
+
+    // Add security section
+    $wp_customize->add_section( 'pure_security_section', array(
+        'title'    => __( 'Security Settings', 'pure' ),
+        'priority' => 140,
+    ) );
+
+    // Add CSS integrity check setting
+    $wp_customize->add_setting( 'pure_enable_css_integrity', array(
+        'default'           => true,
+        'sanitize_callback' => 'pure_sanitize_checkbox',
+        'transport'         => 'refresh',
+    ) );
+
+    $wp_customize->add_control( 'pure_enable_css_integrity', array(
+        'label'       => __( 'Enable CSS Integrity Check', 'pure' ),
+        'description' => __( 'Add Subresource Integrity (SRI) to CSS files for enhanced security. This helps prevent tampered files from loading.', 'pure' ),
+        'section'     => 'pure_security_section',
+        'type'        => 'checkbox',
+    ) );
 }
 add_action( 'customize_register', 'pure_customize_register' );
+
+/**
+ * Sanitize checkbox
+ */
+function pure_sanitize_checkbox( $checked ) {
+    return ( ( isset( $checked ) && true === $checked ) ? true : false );
+}

@@ -1,0 +1,33 @@
+{
+  "name": "pure",
+  "version": "1.0.0",
+  "description": "A minimal, clean, and well-organized WordPress theme built with Pure CSS framework.",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "sass assets/scss/theme.scss:assets/css/theme.css --style expanded --source-map",
+    "build:css:min": "sass assets/scss/theme.scss:assets/css/theme.min.css --style compressed --source-map && postcss assets/css/theme.min.css --replace",
+    "build": "npm run build:css && npm run build:css:min",
+    "watch": "sass assets/scss/theme.scss:assets/css/theme.css --style expanded --source-map --watch",
+    "dev": "npm run watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elfedali/pure.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elfedali/pure/issues"
+  },
+  "homepage": "https://github.com/elfedali/pure#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.21",
+    "cssnano": "^7.1.2",
+    "flexboxgrid": "^6.3.1",
+    "normalize.css": "^8.0.1",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "sass": "^1.93.3"
+  }
+}
