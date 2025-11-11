@@ -38,16 +38,25 @@ function pure_enqueue_assets() {
         PURE_VERSION 
     );
     
-    // Enqueue Alpine.js
+    // Enqueue Alpine.js initialization FIRST (must load before Alpine)
+    wp_enqueue_script(
+        'alpine-init',
+        PURE_URI . '/assets/js/alpine-init.js',
+        array(),
+        PURE_VERSION,
+        false // Load in header, no defer
+    );
+    
+    // Enqueue Alpine.js AFTER init
     wp_enqueue_script(
         'alpinejs',
         PURE_URI . '/assets/js/alpine.min.js',
-        array(),
+        array( 'alpine-init' ),
         PURE_VERSION,
         false // Load in header with defer
     );
     
-    // Add defer attribute to Alpine.js
+    // Add defer attribute only to Alpine.js
     add_filter( 'script_loader_tag', function( $tag, $handle ) {
         if ( 'alpinejs' === $handle ) {
             $tag = str_replace( ' src', ' defer src', $tag );

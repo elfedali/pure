@@ -1,6 +1,6 @@
 # Alpine.js in Pure Theme
 
-Alpine.js is now installed and ready to use in the Pure theme.
+Alpine.js is now installed and ready to use in the Pure theme with common components initialized.
 
 ## What is Alpine.js?
 
@@ -8,13 +8,187 @@ Alpine.js is a lightweight JavaScript framework that gives you the reactive and 
 
 ## Installation
 
-Alpine.js is installed via npm and loaded automatically with the theme:
+Alpine.js is installed via npm and automatically copied to `assets/js/` during build:
 
 ```bash
 npm install alpinejs
+npm run build
 ```
 
-The script is loaded in the header with `defer` attribute for optimal performance.
+The script is loaded in the header with `defer` attribute for optimal performance. The theme includes `alpine-init.js` with pre-built components and utilities.
+
+## Common Components (Pre-initialized)
+
+The theme includes ready-to-use Alpine.js components in `assets/js/alpine-init.js`:
+
+### Mobile Menu
+```html
+<div x-data="mobileMenu()">
+    <button @click="toggle()">
+        <i data-lucide="menu"></i>
+    </button>
+    
+    <nav x-show="open" 
+         x-transition
+         @click.outside="close()">
+        <?php wp_nav_menu(); ?>
+    </nav>
+</div>
+```
+
+### Search
+```html
+<div x-data="search()">
+    <button @click="toggle()">
+        <i data-lucide="search"></i>
+    </button>
+    
+    <form x-show="open" 
+          x-transition
+          @submit="submit()"
+          method="get" 
+          action="<?php echo esc_url( home_url( '/' ) ); ?>">
+        <input type="search" 
+               name="s" 
+               x-model="query"
+               x-ref="searchInput"
+               @keydown.escape="close()">
+    </form>
+</div>
+```
+
+### Dropdown
+```html
+<div x-data="dropdown()">
+    <button @click="toggle()">
+        Options <i data-lucide="chevron-down"></i>
+    </button>
+    
+    <div x-show="open" 
+         x-transition
+         @click.outside="close()">
+        <a href="#">Option 1</a>
+        <a href="#">Option 2</a>
+    </div>
+</div>
+```
+
+### Tabs
+```html
+<div x-data="tabs(1)">
+    <div class="tabs">
+        <button @click="setTab(1)" :class="{ 'active': isActive(1) }">Tab 1</button>
+        <button @click="setTab(2)" :class="{ 'active': isActive(2) }">Tab 2</button>
+        <button @click="setTab(3)" :class="{ 'active': isActive(3) }">Tab 3</button>
+    </div>
+    
+    <div x-show="isActive(1)" x-transition>Content 1</div>
+    <div x-show="isActive(2)" x-transition>Content 2</div>
+    <div x-show="isActive(3)" x-transition>Content 3</div>
+</div>
+```
+
+### Accordion
+```html
+<div x-data="accordion()">
+    <button @click="toggle()">
+        <span>Accordion Title</span>
+        <i :data-lucide="open ? 'chevron-up' : 'chevron-down'"></i>
+    </button>
+    
+    <div x-show="open" x-transition>
+        <p>Accordion content goes here...</p>
+    </div>
+</div>
+```
+
+### Modal
+```html
+<div x-data="modal()">
+    <button @click="show()">Open Modal</button>
+    
+    <div x-show="open" 
+         x-transition
+         @click.self="hide()"
+         class="modal-overlay">
+        <div class="modal-content">
+            <button @click="hide()">
+                <i data-lucide="x"></i>
+            </button>
+            <h2>Modal Title</h2>
+            <p>Modal content...</p>
+        </div>
+    </div>
+</div>
+```
+
+### Sticky Header
+```html
+<header x-data="stickyHeader()"
+        :class="{ 
+            'header-sticky': !atTop, 
+            'header-scrolled': scrolled 
+        }">
+    <!-- Header content -->
+</header>
+```
+
+### Scroll to Top
+```html
+<div x-data="scrollToTop()">
+    <button x-show="show" 
+            x-transition
+            @click="scrollToTop()">
+        <i data-lucide="arrow-up"></i>
+    </button>
+</div>
+```
+
+### Generic Toggle
+```html
+<div x-data="toggle(false)">
+    <button @click="toggle()">Toggle</button>
+    <div x-show="open">Content</div>
+</div>
+```
+
+## Global Store
+
+Access theme state globally using Alpine Store:
+
+```html
+<!-- Anywhere in your templates -->
+<div x-data>
+    <button @click="$store.theme.toggleMobileMenu()">Menu</button>
+    <div x-show="$store.theme.mobileMenuOpen">
+        Navigation...
+    </div>
+</div>
+```
+
+Store properties:
+- `$store.theme.mobileMenuOpen` - Mobile menu state
+- `$store.theme.searchOpen` - Search state
+- `$store.theme.toggleMobileMenu()` - Toggle mobile menu
+- `$store.theme.closeMobileMenu()` - Close mobile menu
+- `$store.theme.toggleSearch()` - Toggle search
+- `$store.theme.closeSearch()` - Close search
+
+## Magic Helpers
+
+### Clipboard
+```html
+<button @click="$clipboard('Text to copy')">
+    Copy to Clipboard
+</button>
+```
+
+### Reinitialize Lucide Icons
+```html
+<div x-data @change="$reinitLucide()">
+    <!-- Icons will reinitialize after changes -->
+</div>
+```
 
 ## Basic Usage
 
