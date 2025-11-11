@@ -24,3 +24,6 @@ require_once PURE_DIR . '/inc/widgets.php';            // Widget areas
 require_once PURE_DIR . '/inc/template-tags.php';      // Template tags
 require_once PURE_DIR . '/inc/template-functions.php'; // Template functions
 require_once PURE_DIR . '/inc/customizer.php';         // Customizer options
+require_once PURE_DIR . '/inc/customizer-css.php';     // Customizer CSS output
+require_once PURE_DIR . '/inc/security.php';           // Security enhancements
+require_once PURE_DIR . '/inc/icons.php';              // Icon helper functions

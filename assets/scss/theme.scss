@@ -175,6 +175,21 @@ article {
 .entry-meta {
     color: var(--text-light);
     font-size: 0.9em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    align-items: center;
+    
+    .posted-on,
+    .byline {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3em;
+    }
+    
+    .lucide-icon {
+        color: var(--primary-color);
+    }
 }
 
 .entry-content {
@@ -191,10 +206,41 @@ article {
     padding-top: var(--spacing-sm);
     border-top: 1px solid var(--border-color);
     font-size: 0.9em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    
+    .cat-links,
+    .tags-links {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3em;
+    }
+    
+    .lucide-icon {
+        color: var(--primary-color);
+    }
 }
 
-.tags-links {
-    margin-top: var(--spacing-sm);
+.read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    
+    &:hover {
+        color: var(--primary-color-dark);
+        
+        .lucide-icon {
+            transform: translateX(3px);
+        }
+    }
+    
+    .lucide-icon {
+        transition: transform var(--transition-speed);
+    }
 }
 
 /* ========================================
@@ -447,6 +493,53 @@ article {
     border-top: 1px solid var(--border-color);
     text-align: center;
     color: var(--text-light);
+}
+
+.footer-content {
+    margin-bottom: var(--spacing-md);
+    
+    a {
+        color: var(--text-light);
+        text-decoration: none;
+        
+        &:hover {
+            color: var(--primary-color);
+        }
+    }
+}
+
+.footer-credits {
+    display: inline-block;
+    margin-left: var(--spacing-xs);
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    
+    a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--background-light);
+        color: var(--text-color);
+        transition: all var(--transition-speed);
+        
+        &:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .lucide-icon {
+            display: block;
+        }
+    }
 }
 
 /* ========================================

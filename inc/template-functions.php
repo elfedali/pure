@@ -3,21 +3,8 @@
  * Custom template filters and functions
  */
 
-/**
- * Custom excerpt length
- */
-function pure_excerpt_length( $length ) {
-    return 40;
-}
-add_filter( 'excerpt_length', 'pure_excerpt_length' );
-
-/**
- * Custom excerpt more
- */
-function pure_excerpt_more( $more ) {
-    return '...';
-}
-add_filter( 'excerpt_more', 'pure_excerpt_more' );
+// Note: pure_excerpt_length() and pure_excerpt_more() are now in template-tags.php
+// They have been integrated with customizer settings
 
 /**
  * Add custom body classes
