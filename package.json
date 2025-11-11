@@ -6,7 +6,8 @@
   "scripts": {
     "build:css": "sass assets/scss/theme.scss:assets/css/theme.css --style expanded --source-map",
     "build:css:min": "sass assets/scss/theme.scss:assets/css/theme.min.css --style compressed --source-map && postcss assets/css/theme.min.css --replace",
-    "build": "npm run build:css && npm run build:css:min",
+    "build:js": "mkdir -p assets/js && cp node_modules/alpinejs/dist/cdn.min.js assets/js/alpine.min.js",
+    "build": "npm run build:css && npm run build:css:min && npm run build:js",
     "watch": "sass assets/scss/theme.scss:assets/css/theme.css --style expanded --source-map --watch",
     "dev": "npm run watch"
   },
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/elfedali/pure#readme",
   "dependencies": {
+    "alpinejs": "^3.15.1",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.2",
     "flexboxgrid": "^6.3.1",

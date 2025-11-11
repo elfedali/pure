@@ -6,6 +6,7 @@ package-lock.json
 assets/css/*.map
 assets/css/theme.css
 assets/css/theme.min.css
+assets/js/alpine.min.js
 
 # OS Files
 .DS_Store

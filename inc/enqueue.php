@@ -38,6 +38,23 @@ function pure_enqueue_assets() {
         PURE_VERSION 
     );
     
+    // Enqueue Alpine.js
+    wp_enqueue_script(
+        'alpinejs',
+        PURE_URI . '/assets/js/alpine.min.js',
+        array(),
+        PURE_VERSION,
+        false // Load in header with defer
+    );
+    
+    // Add defer attribute to Alpine.js
+    add_filter( 'script_loader_tag', function( $tag, $handle ) {
+        if ( 'alpinejs' === $handle ) {
+            $tag = str_replace( ' src', ' defer src', $tag );
+        }
+        return $tag;
+    }, 10, 2 );
+    
     // Enqueue Lucide Icons
     wp_enqueue_script(
         'lucide-icons',
