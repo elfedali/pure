@@ -19,6 +19,13 @@ Text Domain: pure
 // Import theme variables
 @use 'variables';
 
+// Import common components
+@use 'buttons';
+@use 'forms';
+@use 'cards';
+@use 'components';
+@use 'utilities';
+
 /* ========================================
    Basic Layout & Typography
    ======================================== */

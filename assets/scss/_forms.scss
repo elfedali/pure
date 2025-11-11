@@ -1,0 +1,272 @@
+// Forms
+// Common form styles using theme variables
+
+// Form groups
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+// Labels
+label {
+    display: inline-block;
+    margin-bottom: 0.5em;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.label-required {
+    &::after {
+        content: " *";
+        color: #e74c3c;
+    }
+}
+
+// Input fields
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+select,
+textarea,
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.75em 1em;
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    transition: border-color var(--transition-speed) ease-in-out, box-shadow var(--transition-speed) ease-in-out;
+    
+    &:focus {
+        outline: 0;
+        border-color: var(--focus-border);
+        box-shadow: 0 0 0 3px var(--focus-ring);
+    }
+    
+    &::placeholder {
+        color: var(--text-light);
+        opacity: 1;
+    }
+    
+    &:disabled,
+    &[readonly] {
+        background-color: var(--background-light);
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+// Textarea
+textarea,
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+// Select
+select,
+select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75em center;
+    background-size: 12px;
+    padding-right: 2.5em;
+}
+
+// Checkboxes and radios
+input[type="checkbox"],
+input[type="radio"] {
+    width: 1.125em;
+    height: 1.125em;
+    margin-right: 0.5em;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75em;
+    
+    input[type="checkbox"],
+    input[type="radio"] {
+        margin-top: 0;
+    }
+    
+    label {
+        margin-bottom: 0;
+        cursor: pointer;
+    }
+}
+
+// Input sizes
+.form-control-sm {
+    padding: 0.5em 0.75em;
+    font-size: 0.875em;
+}
+
+.form-control-lg {
+    padding: 1em 1.25em;
+    font-size: 1.125em;
+}
+
+// Input groups (with icons or buttons)
+.input-group {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    
+    .form-control {
+        flex: 1 1 auto;
+        width: 1%;
+    }
+    
+    .input-group-prepend,
+    .input-group-append {
+        display: flex;
+        align-items: center;
+    }
+    
+    .input-group-text {
+        display: flex;
+        align-items: center;
+        padding: 0.75em 1em;
+        font-size: var(--font-size-base);
+        font-weight: 400;
+        line-height: 1.5;
+        color: var(--text-color);
+        text-align: center;
+        white-space: nowrap;
+        background-color: var(--background-light);
+        border: 1px solid var(--border-color);
+    }
+    
+    .input-group-prepend {
+        .input-group-text,
+        .button,
+        .btn {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        
+        & + .form-control {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+    
+    .input-group-append {
+        .input-group-text,
+        .button,
+        .btn {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+    
+    .form-control + .input-group-append {
+        .form-control {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+}
+
+// Form validation states
+.form-control.is-valid,
+.was-validated input:valid {
+    border-color: var(--success-color);
+    
+    &:focus {
+        border-color: var(--success-color);
+        box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+    }
+}
+
+.form-control.is-invalid,
+.was-validated input:invalid {
+    border-color: var(--danger-color);
+    
+    &:focus {
+        border-color: var(--danger-color);
+        box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+    }
+}
+
+.valid-feedback {
+    display: block;
+    margin-top: 0.25em;
+    font-size: 0.875em;
+    color: var(--success-text);
+}
+
+.invalid-feedback {
+    display: block;
+    margin-top: 0.25em;
+    font-size: 0.875em;
+    color: var(--danger-text);
+}
+
+// Help text
+.form-text {
+    display: block;
+    margin-top: 0.25em;
+    font-size: 0.875em;
+    color: var(--text-light);
+}
+
+// Search form
+.search-form {
+    display: flex;
+    align-items: stretch;
+    
+    .search-field {
+        flex: 1;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    
+    .search-submit {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}
+
+// Form inline
+.form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-sm);
+    
+    .form-group {
+        margin-bottom: 0;
+    }
+    
+    .form-control {
+        width: auto;
+    }
+}
+
+// WordPress specific forms
+.comment-form {
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    textarea {
+        width: 100%;
+    }
+}
