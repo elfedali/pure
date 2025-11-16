@@ -68,6 +68,12 @@ a {
     position: relative;
     width: 100%;
     overflow: visible;
+    
+    &--full {
+        .site-header__container {
+            max-width: 100%;
+        }
+    }
 }
 
 .site-header__container {
@@ -83,6 +89,51 @@ a {
         grid-template-columns: 1fr auto;
         padding: 1rem;
         gap: 1rem;
+    }
+    
+    // Menu alignment variations
+    &--left {
+        // logo - menu (space) - actions
+        grid-template-columns: auto 1fr auto;
+        
+        .main-navigation {
+            justify-content: flex-start;
+        }
+    }
+    
+    &--center {
+        // logo - (space) menu (space) - actions
+        grid-template-columns: 180px 1fr auto;
+        
+        .main-navigation {
+            justify-content: center;
+        }
+    }
+    
+    &--right {
+        // logo - (space) - menu - actions
+        grid-template-columns: 1fr auto auto;
+        
+        .main-navigation {
+            justify-content: flex-end;
+            grid-column: 2;
+        }
+        
+        .header-actions {
+            grid-column: 3;
+        }
+        
+        @media (max-width: 1024px) {
+            grid-template-columns: 1fr auto;
+            
+            .main-navigation {
+                grid-column: auto;
+            }
+            
+            .header-actions {
+                grid-column: 2;
+            }
+        }
     }
 }
 
@@ -151,7 +202,7 @@ a {
     align-items: center;
     justify-content: center;
     padding: 0.5rem;
-    color: var(--text-color);
+    color: var(--menu-text-color, var(--text-color));
     background: none;
     border: none;
     cursor: pointer;
@@ -161,7 +212,7 @@ a {
     
     &:hover,
     &:focus {
-        color: var(--primary-color, #000);
+        color: var(--menu-hover-color, var(--primary-color, #000));
     }
     
     svg {
@@ -198,8 +249,14 @@ a {
         background: none;
         border: none;
         cursor: pointer;
-        color: var(--text-color);
+        color: var(--menu-text-color, var(--text-color));
         margin-left: auto;
+        transition: color 0.2s ease;
+        
+        &:hover,
+        &:focus {
+            color: var(--menu-hover-color, var(--primary-color, #000));
+        }
         
         svg {
             display: block;

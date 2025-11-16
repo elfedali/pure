@@ -557,6 +557,43 @@ function pure_customize_register( $wp_customize ) {
         ),
     ) );
     
+    // Menu Width
+    $wp_customize->add_setting( 'pure_menu_width', array(
+        'default'           => 'container',
+        'sanitize_callback' => 'pure_sanitize_menu_width',
+        'transport'         => 'refresh',
+    ) );
+
+    $wp_customize->add_control( 'pure_menu_width', array(
+        'label'       => __( 'Menu Width', 'pure' ),
+        'description' => __( 'Choose between contained or full-width menu', 'pure' ),
+        'section'     => 'pure_menu_section',
+        'type'        => 'radio',
+        'choices'     => array(
+            'container'  => __( 'Container (Boxed)', 'pure' ),
+            'full-width' => __( 'Full Width', 'pure' ),
+        ),
+    ) );
+    
+    // Menu Alignment
+    $wp_customize->add_setting( 'pure_menu_alignment', array(
+        'default'           => 'center',
+        'sanitize_callback' => 'pure_sanitize_menu_alignment',
+        'transport'         => 'refresh',
+    ) );
+
+    $wp_customize->add_control( 'pure_menu_alignment', array(
+        'label'       => __( 'Menu Alignment', 'pure' ),
+        'description' => __( 'Choose menu position in the header', 'pure' ),
+        'section'     => 'pure_menu_section',
+        'type'        => 'radio',
+        'choices'     => array(
+            'left'   => __( 'Left', 'pure' ),
+            'center' => __( 'Center', 'pure' ),
+            'right'  => __( 'Right', 'pure' ),
+        ),
+    ) );
+    
     // Color settings moved to unified Colors Panel above
 
     // ========================================
@@ -937,6 +974,22 @@ function pure_sanitize_select( $input, $setting ) {
  */
 function pure_sanitize_float( $input ) {
     return floatval( $input );
+}
+
+/**
+ * Sanitize menu width
+ */
+function pure_sanitize_menu_width( $input ) {
+    $valid = array( 'container', 'full-width' );
+    return in_array( $input, $valid, true ) ? $input : 'container';
+}
+
+/**
+ * Sanitize menu alignment
+ */
+function pure_sanitize_menu_alignment( $input ) {
+    $valid = array( 'left', 'center', 'right' );
+    return in_array( $input, $valid, true ) ? $input : 'center';
 }
 
 /**
