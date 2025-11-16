@@ -167,6 +167,15 @@
 		display: block;
 		position: relative;
 		padding: 0 1.5rem;
+		opacity: 0;
+		transform: translateY(-10px);
+		transition: opacity 0.3s ease, transform 0.3s ease;
+		
+		@for $i from 1 through 10 {
+			&:nth-child(#{$i}) {
+				transition-delay: #{$i * 0.05}s;
+			}
+		}
 	}
 	
 	.pure-menu__link {
@@ -178,6 +187,15 @@
 		letter-spacing: normal;
 		font-weight: 400;
 		white-space: nowrap;
+	}
+	
+	// Show items when dropdown is visible
+	.pure-menu__item--has-children:hover > &,
+	.pure-menu__item--has-children:focus-within > & {
+		.pure-menu__item {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 	
 	// Active dropdown items
@@ -242,6 +260,24 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	opacity: 0;
+	transform: translateY(-15px);
+	transition: opacity 0.4s ease, transform 0.4s ease;
+	
+	@for $i from 1 through 8 {
+		&:nth-child(#{$i}) {
+			transition-delay: #{$i * 0.08}s;
+		}
+	}
+}
+
+// Show columns when mega menu is visible
+.pure-menu__item--mega:hover > .pure-mega-menu,
+.pure-menu__item--mega:focus-within > .pure-mega-menu {
+	.pure-mega-menu__column {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 .pure-mega-menu__heading {

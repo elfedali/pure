@@ -59,8 +59,21 @@ a {
     top: 0;
     z-index: 1000;
     
+    // Adjust for WordPress admin bar
+    .admin-bar & {
+        top: 32px;
+        
+        @media (max-width: 782px) {
+            top: 46px;
+        }
+    }
+    
     @media (max-width: 1024px) {
         position: relative;
+        
+        .admin-bar & {
+            top: 0;
+        }
     }
 }
 
