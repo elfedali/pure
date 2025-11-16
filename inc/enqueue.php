@@ -34,11 +34,18 @@ function pure_enqueue_assets() {
     $dev_mode = get_theme_mod( 'pure_dev_mode', false );
     $css_file = $dev_mode ? 'theme.css' : 'theme.min.css';
     
+    // Use file modification time for cache busting
+    $css_path = get_template_directory() . '/assets/css/' . $css_file;
+    $css_version = PURE_VERSION;
+    if ( file_exists( $css_path ) ) {
+        $css_version = PURE_VERSION . '.' . filemtime( $css_path );
+    }
+    
     wp_enqueue_style( 
         'pure-theme', 
         PURE_URI . '/assets/css/' . $css_file, 
         array(), 
-        $dev_mode ? time() : PURE_VERSION // Cache busting in dev mode
+        $css_version
     );
     
     // Enqueue Alpine.js initialization FIRST (must load before Alpine)
@@ -68,11 +75,17 @@ function pure_enqueue_assets() {
     }, 10, 2 );
     
     // Enqueue menu navigation script
+    $js_path = get_template_directory() . '/assets/js/menu.js';
+    $js_version = PURE_VERSION;
+    if ( file_exists( $js_path ) ) {
+        $js_version = PURE_VERSION . '.' . filemtime( $js_path );
+    }
+    
     wp_enqueue_script(
         'pure-menu',
         PURE_URI . '/assets/js/menu.js',
         array(),
-        PURE_VERSION,
+        $js_version,
         true
     );
     
