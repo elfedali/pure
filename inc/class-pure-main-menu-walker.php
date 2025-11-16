@@ -147,19 +147,12 @@ if ( ! class_exists( 'Pure_Main_Menu_Walker' ) ) {
 			if ( $depth === 1 && $this->is_mega_menu && in_array( 'menu-item-has-children', $classes, true ) ) {
 				$item_output = '<h3 class="pure-mega-menu__heading">' . esc_html( $title ) . '</h3>';
 			} else {
-				$item_output  = '<a class="pure-menu__link"' . $attributes . '>';
-				$item_output .= '<span class="pure-menu__text">' . esc_html( $title ) . '</span>';
-				$item_output .= '</a>';
-			}
+			$item_output  = '<a class="pure-menu__link"' . $attributes . '>';
+			$item_output .= '<span class="pure-menu__text">' . esc_html( $title ) . '</span>';
+			$item_output .= '</a>';
+		}
 
-			// Add toggle button for root items with children (not in mega menu columns)
-			if ( $depth === 0 && in_array( 'menu-item-has-children', $classes, true ) ) {
-				$item_output .= '<button class="pure-menu__toggle" aria-label="' . esc_attr__( 'Expand submenu', 'pure' ) . '" aria-expanded="false" type="button">';
-				$item_output .= '<span class="pure-menu__toggle-icon" aria-hidden="true"></span>';
-				$item_output .= '</button>';
-			}
-
-			$item_output = apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+		$item_output = apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 			$output     .= $item_output;
 		}
 

@@ -1,8 +1,7 @@
 /**
  * Pure Menu - Mega Menu Navigation
  * 
- * Handles desktop hover interactions, mobile toggle functionality,
- * keyboard navigation, and accessibility features
+ * Handles keyboard navigation and accessibility features
  */
 
 (function() {
@@ -14,89 +13,12 @@
 	function initMenu() {
 		const nav = document.querySelector('.main-navigation');
 		if (!nav) return;
-
-		const menuItems = nav.querySelectorAll('.pure-menu__item--has-children');
-		
-		// Initialize mobile menu toggle
-		initMobileMenuToggle(nav);
-		
-		// Initialize mobile toggles
-		initMobileToggles();
 		
 		// Initialize keyboard navigation
 		initKeyboardNav(nav);
 		
 		// Close menus on outside click
 		initOutsideClick(nav);
-		
-		// Handle window resize
-		handleResize();
-	}
-
-	/**
-	 * Initialize mobile menu toggle button
-	 */
-	function initMobileMenuToggle(nav) {
-		const toggle = document.querySelector('.mobile-menu-toggle');
-		if (!toggle) return;
-		
-		toggle.addEventListener('click', function() {
-			const isOpen = nav.classList.contains('is-open');
-			
-			if (isOpen) {
-				nav.classList.remove('is-open');
-				this.setAttribute('aria-expanded', 'false');
-			} else {
-				nav.classList.add('is-open');
-				this.setAttribute('aria-expanded', 'true');
-			}
-		});
-	}
-
-	/**
-	 * Initialize mobile toggle buttons
-	 */
-	function initMobileToggles() {
-		const toggles = document.querySelectorAll('.pure-menu__toggle');
-		
-		toggles.forEach(toggle => {
-			toggle.addEventListener('click', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				
-				const menuItem = this.closest('.pure-menu__item--has-children');
-				if (!menuItem) return;
-				
-				const isExpanded = this.getAttribute('aria-expanded') === 'true';
-				
-				// Close all other open menus at same level
-				const siblings = Array.from(menuItem.parentElement.children);
-				siblings.forEach(sibling => {
-					if (sibling !== menuItem && sibling.classList.contains('pure-menu__item--has-children')) {
-						const siblingToggle = sibling.querySelector('.pure-menu__toggle');
-						const siblingLink = sibling.querySelector('.pure-menu__link');
-						if (siblingToggle) {
-							siblingToggle.setAttribute('aria-expanded', 'false');
-						}
-						if (siblingLink) {
-							siblingLink.setAttribute('aria-expanded', 'false');
-						}
-						sibling.setAttribute('aria-expanded', 'false');
-					}
-				});
-				
-				// Toggle current menu
-				const newState = !isExpanded;
-				this.setAttribute('aria-expanded', newState.toString());
-				
-				const link = menuItem.querySelector('.pure-menu__link');
-				if (link) {
-					link.setAttribute('aria-expanded', newState.toString());
-				}
-				
-				menuItem.setAttribute('aria-expanded', newState.toString());
-			});
-		});
 	}
 
 	/**
@@ -147,17 +69,12 @@
 					}
 				}
 				
-				// Escape - close submenu
+				// Escape - close submenu and return focus
 				if (e.key === 'Escape') {
 					const openItem = item.closest('.pure-menu__item--has-children');
 					if (openItem) {
-						const toggle = openItem.querySelector('.pure-menu__toggle');
 						const link = openItem.querySelector('.pure-menu__link');
-						if (toggle) {
-							toggle.setAttribute('aria-expanded', 'false');
-						}
 						if (link) {
-							link.setAttribute('aria-expanded', 'false');
 							link.focus();
 						}
 					}
@@ -213,40 +130,8 @@
 		document.addEventListener('click', function(e) {
 			// Check if click is outside navigation
 			if (!nav.contains(e.target)) {
-				// Close all expanded menus
-				const expandedToggles = nav.querySelectorAll('.pure-menu__toggle[aria-expanded="true"]');
-				expandedToggles.forEach(toggle => {
-					toggle.setAttribute('aria-expanded', 'false');
-					const menuItem = toggle.closest('.pure-menu__item');
-					if (menuItem) {
-						menuItem.setAttribute('aria-expanded', 'false');
-					}
-				});
+				// Menu will close automatically via CSS :hover
 			}
-		});
-	}
-
-	/**
-	 * Handle window resize
-	 */
-	function handleResize() {
-		let resizeTimer;
-		window.addEventListener('resize', function() {
-			clearTimeout(resizeTimer);
-			resizeTimer = setTimeout(function() {
-				// Reset all aria-expanded on desktop
-				if (window.innerWidth > 1024) {
-					const toggles = document.querySelectorAll('.pure-menu__toggle');
-					toggles.forEach(toggle => {
-						toggle.setAttribute('aria-expanded', 'false');
-					});
-					
-					const menuItems = document.querySelectorAll('.pure-menu__item--has-children');
-					menuItems.forEach(item => {
-						item.removeAttribute('aria-expanded');
-					});
-				}
-			}, 250);
 		});
 	}
 

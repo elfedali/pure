@@ -1,0 +1,93 @@
+/**
+ * Breakpoints
+ * Centralized responsive breakpoints for the entire theme
+ */
+
+// Breakpoint values
+$breakpoint-xs: 480px;   // Extra small devices (phones)
+$breakpoint-sm: 640px;   // Small devices (large phones)
+$breakpoint-md: 768px;   // Medium devices (tablets)
+$breakpoint-lg: 1024px;  // Large devices (desktops)
+$breakpoint-xl: 1280px;  // Extra large devices (large desktops)
+$breakpoint-xxl: 1536px; // 2X large devices (larger desktops)
+
+// Mixins for media queries
+@mixin xs {
+  @media (max-width: #{$breakpoint-xs}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (max-width: #{$breakpoint-sm}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: #{$breakpoint-md}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (max-width: #{$breakpoint-xl}) {
+    @content;
+  }
+}
+
+@mixin xxl {
+  @media (max-width: #{$breakpoint-xxl}) {
+    @content;
+  }
+}
+
+// Min-width mixins (mobile-first approach)
+@mixin xs-up {
+  @media (min-width: #{$breakpoint-xs + 1}) {
+    @content;
+  }
+}
+
+@mixin sm-up {
+  @media (min-width: #{$breakpoint-sm + 1}) {
+    @content;
+  }
+}
+
+@mixin md-up {
+  @media (min-width: #{$breakpoint-md + 1}) {
+    @content;
+  }
+}
+
+@mixin lg-up {
+  @media (min-width: #{$breakpoint-lg + 1}) {
+    @content;
+  }
+}
+
+@mixin xl-up {
+  @media (min-width: #{$breakpoint-xl + 1}) {
+    @content;
+  }
+}
+
+@mixin xxl-up {
+  @media (min-width: #{$breakpoint-xxl + 1}) {
+    @content;
+  }
+}
+
+// Between breakpoints
+@mixin between($min, $max) {
+  @media (min-width: #{$min}) and (max-width: #{$max}) {
+    @content;
+  }
+}

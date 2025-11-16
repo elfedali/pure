@@ -166,5 +166,7 @@ function pure_add_menu_items( $menu_id, $items, $parent_id = 0 ) {
 	}
 }
 
-// Hook into theme activation
-add_action( 'after_switch_theme', 'pure_create_sample_menu' );
+// Sample menu creation is disabled by default to avoid overriding
+// existing site menus when the theme is activated. If you want to
+// auto-create the demo menu, uncomment the line below.
+// add_action( 'after_switch_theme', 'pure_create_sample_menu' );

@@ -105,15 +105,15 @@ function pure_enqueue_assets() {
     $menu_font_size = get_theme_mod( 'pure_menu_font_size', 14 );
     
     $custom_css = "
-        :root {
-            --logo-height: {$logo_height}px;
-            --menu-text-transform: {$menu_text_transform};
-            --menu-bg-color: {$menu_bg_color};
-            --menu-text-color: {$menu_text_color};
-            --menu-hover-color: {$menu_hover_color};
-            --menu-font-size: {$menu_font_size}px;
-        }
-    ";
+:root {
+    --logo-height: {$logo_height}px;
+    --menu-text-transform: {$menu_text_transform};
+    --menu-bg-color: {$menu_bg_color};
+    --menu-text-color: {$menu_text_color};
+    --menu-hover-color: {$menu_hover_color};
+    --menu-font-size: {$menu_font_size}px;
+}
+";
     
     wp_add_inline_style( 'pure-theme', $custom_css );
 }
