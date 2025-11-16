@@ -51,7 +51,7 @@ a {
 
 .site-header {
     border-bottom: 1px solid var(--border-color);
-    background: #fff;
+    background: var(--menu-bg-color, #fff);
     position: sticky;
     top: 0;
     z-index: 1000;

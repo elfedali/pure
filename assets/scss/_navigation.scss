@@ -58,17 +58,17 @@
 	display: inline-flex;
 	align-items: center;
 	padding: 0.5rem 0;
-	color: inherit;
+	color: var(--menu-text-color, inherit);
 	text-decoration: none;
 	font-weight: 500;
-	font-size: 0.875rem;
-	text-transform: uppercase;
+	font-size: var(--menu-font-size, 0.875rem);
+	text-transform: var(--menu-text-transform, uppercase);
 	letter-spacing: 0.5px;
 	transition: color 0.2s ease;
 	
 	&:hover,
 	&:focus {
-		color: var(--wp--preset--color--primary, #000);
+		color: var(--menu-hover-color, #000);
 	}
 	
 	.pure-menu__item--root > & {

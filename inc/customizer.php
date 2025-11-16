@@ -410,33 +410,19 @@ function pure_customize_register( $wp_customize ) {
     // Header Section
     // ========================================
     
-    $wp_customize->add_section( 'pure_header_section', array(
-        'title'    => __( 'Header Settings', 'pure' ),
+    $wp_customize->add_panel( 'pure_header_panel', array(
+        'title'    => __( 'Header & Navigation', 'pure' ),
         'priority' => 60,
     ) );
     
-    // Show/Hide Site Title
-    $wp_customize->add_setting( 'pure_show_site_title', array(
-        'default'           => true,
-        'sanitize_callback' => 'pure_sanitize_checkbox',
-    ) );
-
-    $wp_customize->add_control( 'pure_show_site_title', array(
-        'label'   => __( 'Display Site Title', 'pure' ),
-        'section' => 'pure_header_section',
-        'type'    => 'checkbox',
-    ) );
+    // ========================================
+    // Logo Section
+    // ========================================
     
-    // Show/Hide Site Description
-    $wp_customize->add_setting( 'pure_show_site_description', array(
-        'default'           => true,
-        'sanitize_callback' => 'pure_sanitize_checkbox',
-    ) );
-
-    $wp_customize->add_control( 'pure_show_site_description', array(
-        'label'   => __( 'Display Site Description', 'pure' ),
-        'section' => 'pure_header_section',
-        'type'    => 'checkbox',
+    $wp_customize->add_section( 'pure_logo_section', array(
+        'title'    => __( 'Logo', 'pure' ),
+        'panel'    => 'pure_header_panel',
+        'priority' => 10,
     ) );
     
     // Logo Height
@@ -448,7 +434,7 @@ function pure_customize_register( $wp_customize ) {
 
     $wp_customize->add_control( 'pure_logo_height', array(
         'label'       => __( 'Logo Height (px)', 'pure' ),
-        'section'     => 'pure_header_section',
+        'section'     => 'pure_logo_section',
         'type'        => 'range',
         'input_attrs' => array(
             'min'  => 30,
@@ -456,6 +442,112 @@ function pure_customize_register( $wp_customize ) {
             'step' => 5,
         ),
     ) );
+
+    // ========================================
+    // Menu Section
+    // ========================================
+    
+    $wp_customize->add_section( 'pure_menu_section', array(
+        'title'    => __( 'Menu', 'pure' ),
+        'panel'    => 'pure_header_panel',
+        'priority' => 20,
+    ) );
+    
+    // Typography Heading
+    $wp_customize->add_setting( 'pure_menu_typography_heading', array(
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    
+    $wp_customize->add_control( new Pure_Heading_Control( $wp_customize, 'pure_menu_typography_heading', array(
+        'label'   => __( 'Typography', 'pure' ),
+        'section' => 'pure_menu_section',
+    ) ) );
+    
+    // Menu Text Transform
+    $wp_customize->add_setting( 'pure_menu_text_transform', array(
+        'default'           => 'uppercase',
+        'sanitize_callback' => 'pure_sanitize_select',
+        'transport'         => 'postMessage',
+    ) );
+
+    $wp_customize->add_control( 'pure_menu_text_transform', array(
+        'label'   => __( 'Text Style', 'pure' ),
+        'section' => 'pure_menu_section',
+        'type'    => 'select',
+        'choices' => array(
+            'none'       => __( 'Normal', 'pure' ),
+            'uppercase'  => __( 'Uppercase', 'pure' ),
+            'lowercase'  => __( 'Lowercase', 'pure' ),
+            'capitalize' => __( 'Capitalize', 'pure' ),
+        ),
+    ) );
+    
+    // Menu Font Size
+    $wp_customize->add_setting( 'pure_menu_font_size', array(
+        'default'           => 14,
+        'sanitize_callback' => 'absint',
+        'transport'         => 'postMessage',
+    ) );
+
+    $wp_customize->add_control( 'pure_menu_font_size', array(
+        'label'       => __( 'Font Size (px)', 'pure' ),
+        'section'     => 'pure_menu_section',
+        'type'        => 'range',
+        'input_attrs' => array(
+            'min'  => 10,
+            'max'  => 24,
+            'step' => 1,
+        ),
+    ) );
+    
+    // Colors Heading
+    $wp_customize->add_setting( 'pure_menu_colors_heading', array(
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    
+    $wp_customize->add_control( new Pure_Heading_Control( $wp_customize, 'pure_menu_colors_heading', array(
+        'label'   => __( 'Colors', 'pure' ),
+        'section' => 'pure_menu_section',
+    ) ) );
+    
+    // Menu Background Color
+    $wp_customize->add_setting( 'pure_menu_background_color', array(
+        'default'           => '#ffffff',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'pure_menu_background_color', array(
+        'label'    => __( 'Background Color', 'pure' ),
+        'section'  => 'pure_menu_section',
+        'settings' => 'pure_menu_background_color',
+    ) ) );
+    
+    // Menu Text Color
+    $wp_customize->add_setting( 'pure_menu_text_color', array(
+        'default'           => '#333333',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'pure_menu_text_color', array(
+        'label'    => __( 'Text Color', 'pure' ),
+        'section'  => 'pure_menu_section',
+        'settings' => 'pure_menu_text_color',
+    ) ) );
+    
+    // Menu Hover Color
+    $wp_customize->add_setting( 'pure_menu_hover_color', array(
+        'default'           => '#000000',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'pure_menu_hover_color', array(
+        'label'    => __( 'Hover Color', 'pure' ),
+        'section'  => 'pure_menu_section',
+        'settings' => 'pure_menu_hover_color',
+    ) ) );
 
     // ========================================
     // Footer Section
@@ -746,24 +838,68 @@ function pure_customizer_controls_scripts() {
         true
     );
     
-    // Add inline CSS for range slider styling
+    // Add inline CSS for range slider styling (minimal, using WP admin defaults)
     wp_add_inline_style(
         'customize-controls',
         '
         .customize-control-range .range-value {
             display: inline-block;
-            margin-left: 10px;
-            padding: 4px 10px;
-            background: #f0f0f1;
-            border-radius: 3px;
+            margin-left: 8px;
             font-weight: 600;
-            min-width: 40px;
-            text-align: center;
+            color: #50575e;
         }
         .customize-control-range input[type="range"] {
-            width: calc(100% - 60px);
-            display: inline-block;
-            vertical-align: middle;
+            width: 100%;
+            max-width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: #dcdcde;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        .customize-control-range input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #2271b1;
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+            margin-top: -8px;
+        }
+        .customize-control-range input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #2271b1;
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        }
+        .customize-control-range input[type="range"]::-webkit-slider-runnable-track {
+            background: linear-gradient(to right, #2271b1 0%, #2271b1 var(--track-fill, 0%), #dcdcde var(--track-fill, 0%), #dcdcde 100%);
+            height: 4px;
+            border-radius: 2px;
+        }
+        .customize-control-range input[type="range"]::-moz-range-track {
+            background: #dcdcde;
+            height: 4px;
+            border-radius: 2px;
+        }
+        .customize-control-range input[type="range"]::-moz-range-progress {
+            background: #2271b1;
+            height: 4px;
+            border-radius: 2px;
+        }
+        .customize-control-range .range-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .customize-control-range .range-wrapper input[type="range"] {
+            flex: 1;
         }
         '
     );
@@ -791,4 +927,22 @@ function pure_sanitize_select( $input, $setting ) {
  */
 function pure_sanitize_float( $input ) {
     return floatval( $input );
+}
+
+/**
+ * Custom Heading Control
+ */
+if ( class_exists( 'WP_Customize_Control' ) ) {
+    class Pure_Heading_Control extends WP_Customize_Control {
+        public $type = 'heading';
+        
+        public function render_content() {
+            if ( ! empty( $this->label ) ) {
+                echo '<h3 style="margin: 25px 0 10px; padding: 10px 0 0; border-top: 1px solid #ddd; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #555;">' . esc_html( $this->label ) . '</h3>';
+            }
+            if ( ! empty( $this->description ) ) {
+                echo '<span class="description customize-control-description" style="display: block; margin-bottom: 10px;">' . $this->description . '</span>';
+            }
+        }
+    }
 }

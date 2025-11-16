@@ -96,12 +96,22 @@ function pure_enqueue_assets() {
         wp_enqueue_script( 'comment-reply' );
     }
     
-    // Add inline CSS for logo height
+    // Add inline CSS for customizer options
     $logo_height = get_theme_mod( 'pure_logo_height', 50 );
+    $menu_text_transform = get_theme_mod( 'pure_menu_text_transform', 'uppercase' );
+    $menu_bg_color = get_theme_mod( 'pure_menu_background_color', '#ffffff' );
+    $menu_text_color = get_theme_mod( 'pure_menu_text_color', '#333333' );
+    $menu_hover_color = get_theme_mod( 'pure_menu_hover_color', '#000000' );
+    $menu_font_size = get_theme_mod( 'pure_menu_font_size', 14 );
     
     $custom_css = "
         :root {
             --logo-height: {$logo_height}px;
+            --menu-text-transform: {$menu_text_transform};
+            --menu-bg-color: {$menu_bg_color};
+            --menu-text-color: {$menu_text_color};
+            --menu-hover-color: {$menu_hover_color};
+            --menu-font-size: {$menu_font_size}px;
         }
     ";
     

@@ -9,18 +9,15 @@
         <div class="site-logo">
             <?php the_custom_logo(); ?>
         </div>
-    <?php elseif ( get_theme_mod( 'pure_show_site_title', true ) ) : ?>
+    <?php else : ?>
         <h1 class="site-title">
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a>
         </h1>
-    <?php endif; ?>
-    
-    <?php 
-    if ( get_theme_mod( 'pure_show_site_description', true ) ) :
+        <?php 
         $description = get_bloginfo( 'description', 'display' );
         if ( $description || is_customize_preview() ) : 
         ?>
             <p class="site-description"><?php echo $description; ?></p>
-        <?php endif;
-    endif; ?>
+        <?php endif; ?>
+    <?php endif; ?>
 </div>
