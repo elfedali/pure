@@ -30,12 +30,15 @@ function pure_enqueue_assets() {
         }
     }
     
-    // Enqueue compiled theme CSS (minified version)
+    // Enqueue compiled theme CSS (minified or dev version based on settings)
+    $dev_mode = get_theme_mod( 'pure_dev_mode', false );
+    $css_file = $dev_mode ? 'theme.css' : 'theme.min.css';
+    
     wp_enqueue_style( 
         'pure-theme', 
-        PURE_URI . '/assets/css/theme.min.css', 
+        PURE_URI . '/assets/css/' . $css_file, 
         array(), 
-        PURE_VERSION 
+        $dev_mode ? time() : PURE_VERSION // Cache busting in dev mode
     );
     
     // Enqueue Alpine.js initialization FIRST (must load before Alpine)

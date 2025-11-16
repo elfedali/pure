@@ -56,14 +56,16 @@ textarea,
     }
     
     &::placeholder {
-        color: var(--text-light);
+        color: var(--text-placeholder);
         opacity: 1;
     }
     
     &:disabled,
     &[readonly] {
-        background-color: var(--background-light);
-        opacity: 0.6;
+        background-color: var(--background-gray);
+        color: var(--text-disabled);
+        border-color: var(--border-light);
+        opacity: 1;
         cursor: not-allowed;
     }
 }

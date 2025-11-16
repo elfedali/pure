@@ -1,15 +1,3 @@
-/*!
-Theme Name: Pure
-Theme URI: https://example.com
-Author: Your Name
-Author URI: https://example.com
-Description: A minimal WordPress theme built with Flexbox Grid and modern CSS
-Version: 1.0
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: pure
-*/
-
 // Import normalize.css for cross-browser consistency
 @use '../../node_modules/normalize.css/normalize.css';
 
@@ -22,7 +10,6 @@ Text Domain: pure
 // Import common components
 @use 'buttons';
 @use 'forms';
-@use 'cards';
 @use 'components';
 @use 'utilities';
 

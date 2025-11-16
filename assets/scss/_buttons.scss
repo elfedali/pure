@@ -1,5 +1,5 @@
 // Buttons
-// Common button styles using theme variables
+// Modern button styles with multiple variants
 
 .button,
 .btn,
@@ -7,11 +7,14 @@ button[type="submit"],
 input[type="submit"],
 input[type="button"],
 .wp-block-button__link {
-    display: inline-block;
-    padding: 0.75em 1.5em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    padding: 0.625em 1.25em;
     font-family: var(--font-family-base);
-    font-size: var(--font-size-base);
-    font-weight: 500;
+    font-size: 0.9375em;
+    font-weight: 600;
     line-height: 1.5;
     text-align: center;
     text-decoration: none;
@@ -19,158 +22,67 @@ input[type="button"],
     vertical-align: middle;
     cursor: pointer;
     user-select: none;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     border-radius: var(--border-radius-md);
     background-color: var(--primary-color);
     color: #fff;
-    transition: all var(--transition-speed) ease-in-out;
+    transition: all var(--transition-speed-fast) ease-in-out;
+    position: relative;
+    overflow: hidden;
     
-    &:hover,
-    &:focus {
+    // Subtle gradient overlay
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+        opacity: 0;
+        transition: opacity var(--transition-speed-fast) ease-in-out;
+    }
+    
+    &:hover {
         background-color: var(--primary-color-dark);
         color: #fff;
         text-decoration: none;
-        transform: translateY(-1px);
-        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 120, 231, 0.3);
+        
+        &::before {
+            opacity: 1;
+        }
+    }
+    
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 4px var(--focus-ring);
     }
     
     &:active {
         transform: translateY(0);
-        box-shadow: var(--shadow-sm);
+        box-shadow: 0 2px 4px rgba(0, 120, 231, 0.2);
     }
     
     &:disabled,
     &.disabled {
-        opacity: 0.6;
+        background-color: var(--gray-300);
+        color: var(--gray-600);
         cursor: not-allowed;
         pointer-events: none;
+        box-shadow: none;
+        transform: none;
     }
-}
-
-// Button variants
-.button-secondary,
-.btn-secondary {
-    background-color: var(--secondary-color);
-    color: #fff;
-    
-    &:hover,
-    &:focus {
-        background-color: var(--secondary-color-dark);
-        color: #fff;
-    }
-}
-
-.button-outline,
-.btn-outline {
-    background-color: transparent;
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-    
-    &:hover,
-    &:focus {
-        background-color: var(--primary-color);
-        color: #fff;
-    }
-}
-
-.button-ghost,
-.btn-ghost {
-    background-color: transparent;
-    border-color: transparent;
-    color: var(--primary-color);
-    
-    &:hover,
-    &:focus {
-        background-color: var(--hover-bg);
-        color: var(--primary-color-dark);
-    }
-}
-
-.button-light,
-.btn-light {
-    background-color: var(--background-light);
-    border-color: var(--border-color);
-    color: var(--text-color);
-    
-    &:hover,
-    &:focus {
-        background-color: var(--hover-bg);
-        color: var(--text-color);
-    }
-}
-
-// Button sizes
-.button-small,
-.btn-sm {
-    padding: 0.5em 1em;
-    font-size: 0.875em;
-}
-
-.button-large,
-.btn-lg {
-    padding: 1em 2em;
-    font-size: 1.125em;
-}
-
-.button-block,
-.btn-block {
-    display: block;
-    width: 100%;
 }
 
 // Button with icon
 .button-icon,
 .btn-icon {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5em;
-    
     i,
     svg {
-        width: 1.2em;
-        height: 1.2em;
-    }
-}
-
-// Icon only button
-.button-icon-only,
-.btn-icon-only {
-    padding: 0.75em;
-    width: 2.5em;
-    height: 2.5em;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    
-    i,
-    svg {
-        width: 1.2em;
-        height: 1.2em;
-    }
-}
-
-// Button group
-.button-group,
-.btn-group {
-    display: inline-flex;
-    gap: 0;
-    
-    .button,
-    .btn {
-        border-radius: 0;
-        
-        &:first-child {
-            border-top-left-radius: var(--border-radius-md);
-            border-bottom-left-radius: var(--border-radius-md);
-        }
-        
-        &:last-child {
-            border-top-right-radius: var(--border-radius-md);
-            border-bottom-right-radius: var(--border-radius-md);
-        }
-        
-        &:not(:last-child) {
-            border-right: 1px solid rgba(255, 255, 255, 0.2);
-        }
+        width: 1.125em;
+        height: 1.125em;
+        flex-shrink: 0;
     }
 }

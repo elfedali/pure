@@ -541,6 +541,57 @@ function pure_customize_register( $wp_customize ) {
     ) );
     
     // ========================================
+    // Development Mode Section
+    // ========================================
+    
+    $wp_customize->add_section( 'pure_dev_mode_section', array(
+        'title'       => __( 'Development Mode', 'pure' ),
+        'description' => __( 'Settings for development and debugging.', 'pure' ),
+        'priority'    => 143,
+    ) );
+    
+    // Enable Development Mode
+    $wp_customize->add_setting( 'pure_dev_mode', array(
+        'default'           => false,
+        'sanitize_callback' => 'pure_sanitize_checkbox',
+        'transport'         => 'refresh',
+    ) );
+
+    $wp_customize->add_control( 'pure_dev_mode', array(
+        'label'       => __( 'Enable Development Mode', 'pure' ),
+        'description' => __( 'Use unminified CSS (theme.css) with source maps for debugging. Disable for production.', 'pure' ),
+        'section'     => 'pure_dev_mode_section',
+        'type'        => 'checkbox',
+    ) );
+    
+    // Enable Debug Mode
+    $wp_customize->add_setting( 'pure_debug_mode', array(
+        'default'           => false,
+        'sanitize_callback' => 'pure_sanitize_checkbox',
+        'transport'         => 'refresh',
+    ) );
+
+    $wp_customize->add_control( 'pure_debug_mode', array(
+        'label'       => __( 'Enable Debug Mode', 'pure' ),
+        'description' => __( 'Add debug comments to HTML output and enable error reporting. Never use in production!', 'pure' ),
+        'section'     => 'pure_dev_mode_section',
+        'type'        => 'checkbox',
+    ) );
+    
+    // Show Template Info
+    $wp_customize->add_setting( 'pure_show_template_info', array(
+        'default'           => false,
+        'sanitize_callback' => 'pure_sanitize_checkbox',
+    ) );
+
+    $wp_customize->add_control( 'pure_show_template_info', array(
+        'label'       => __( 'Show Template Information', 'pure' ),
+        'description' => __( 'Display current template file in HTML comments.', 'pure' ),
+        'section'     => 'pure_dev_mode_section',
+        'type'        => 'checkbox',
+    ) );
+    
+    // ========================================
     // Security Section
     // ========================================
     

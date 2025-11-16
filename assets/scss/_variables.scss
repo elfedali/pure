@@ -2,25 +2,46 @@
 // Primary color and other customizable variables
 
 :root {
-    // Colors
+    // Gray Scale Palette (lightest to darkest)
+    --gray-50: #fafafa;   // Almost white
+    --gray-100: #f5f5f5;  // Very light gray
+    --gray-200: #e5e5e5;  // Light gray
+    --gray-300: #d4d4d4;  // Medium-light gray
+    --gray-400: #a3a3a3;  // Medium gray
+    --gray-500: #737373;  // True gray
+    --gray-600: #525252;  // Medium-dark gray
+    --gray-700: #404040;  // Dark gray
+    --gray-800: #262626;  // Very dark gray
+    --gray-900: #171717;  // Almost black
+    
+    // Brand Colors
     --primary-color: #0078e7;
     --primary-color-dark: #005bb5;
     --primary-color-light: #4da3ff;
     
-    --secondary-color: #666;
-    --secondary-color-dark: #555;
-    --secondary-color-light: #888;
+    --secondary-color: var(--gray-600);
+    --secondary-color-dark: var(--gray-700);
+    --secondary-color-light: var(--gray-500);
     
-    --text-color: #333;
-    --text-light: #666;
-    --text-muted: #999;
+    // Text colors using gray scale
+    --text-color: var(--gray-900);        // Main text - almost black
+    --text-base: var(--gray-800);         // Base text - very dark
+    --text-light: var(--gray-600);        // Light text - medium-dark
+    --text-muted: var(--gray-500);        // Muted text - true gray
+    --text-disabled: var(--gray-400);     // Disabled text - medium gray
+    --text-placeholder: var(--gray-400);  // Placeholder text - medium gray
     
-    --border-color: #e5e5e5;
-    --border-color-dark: #ddd;
+    // Border colors using gray scale
+    --border-color: var(--gray-200);      // Default border - light gray
+    --border-light: var(--gray-100);      // Lighter border
+    --border-medium: var(--gray-300);     // Medium border
+    --border-dark: var(--gray-400);       // Dark border
     
-    --background-color: #fff;
-    --background-light: #f9f9f9;
-    --background-dark: #f5f5f5;
+    // Background colors using gray scale
+    --background-color: #fff;             // Pure white
+    --background-light: var(--gray-50);   // Almost white
+    --background-gray: var(--gray-100);   // Very light gray
+    --background-dark: var(--gray-200);   // Light gray
     
     // State colors
     --success-color: #28a745;
@@ -75,12 +96,24 @@
     // Container
     --container-max-width: 1200px;
     
-    // Border radius
+    // Border radius - Customize to change all component roundness
+    --border-radius-none: 0;
     --border-radius-sm: 3px;
-    --border-radius-md: 5px;
+    --border-radius-md: 6px;
+    --border-radius-lg: 10px;
+    --border-radius-xl: 16px;
+    --border-radius-2xl: 24px;
+    --border-radius-full: 9999px;  // For circles/pills
+    
+    // Border widths
+    --border-width: 1px;
+    --border-width-thick: 2px;
+    --border-width-thicker: 3px;
     
     // Transitions
     --transition-speed: 0.2s;
+    --transition-speed-fast: 0.1s;
+    --transition-speed-slow: 0.3s;
 }
 
 // SCSS Variables (for use in calculations)
