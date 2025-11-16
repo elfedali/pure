@@ -114,7 +114,9 @@ function pure_enqueue_assets() {
     $menu_text_transform = get_theme_mod( 'pure_menu_text_transform', 'uppercase' );
     $menu_bg_color = get_theme_mod( 'pure_menu_background_color', '#ffffff' );
     $menu_text_color = get_theme_mod( 'pure_menu_text_color', '#333333' );
-    $menu_hover_color = get_theme_mod( 'pure_menu_hover_color', '#000000' );
+    $primary_color = get_theme_mod( 'pure_primary_color', '#0078e7' );
+    // Menu hover defaults to primary brand color for consistency
+    $menu_hover_color = get_theme_mod( 'pure_menu_hover_color', $primary_color );
     $menu_font_size = get_theme_mod( 'pure_menu_font_size', 14 );
     
     $custom_css = "

@@ -6,49 +6,106 @@
 function pure_customize_register( $wp_customize ) {
     
     // ========================================
-    // Colors Section
+    // Colors Panel - Centralized Color Management
     // ========================================
+    
+    $wp_customize->add_panel( 'pure_colors_panel', array(
+        'title'       => __( 'Colors', 'pure' ),
+        'description' => __( 'Manage all theme colors in one place', 'pure' ),
+        'priority'    => 30,
+    ) );
+    
+    // Brand Colors Section
+    $wp_customize->add_section( 'pure_brand_colors', array(
+        'title'    => __( 'Brand Colors', 'pure' ),
+        'panel'    => 'pure_colors_panel',
+        'priority' => 10,
+    ) );
     
     // Primary Color
     $wp_customize->add_setting( 'pure_primary_color', array(
         'default'           => '#0078e7',
         'sanitize_callback' => 'sanitize_hex_color',
-        'transport'         => 'refresh',
+        'transport'         => 'postMessage',
     ) );
 
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'pure_primary_color', array(
-        'label'    => __( 'Primary Color', 'pure' ),
-        'section'  => 'colors',
-        'settings' => 'pure_primary_color',
-        'priority' => 10,
+        'label'       => __( 'Primary Brand Color', 'pure' ),
+        'description' => __( 'Main color used throughout the site', 'pure' ),
+        'section'     => 'pure_brand_colors',
     ) ) );
     
     // Secondary Color
     $wp_customize->add_setting( 'pure_secondary_color', array(
-        'default'           => '#666',
+        'default'           => '#666666',
         'sanitize_callback' => 'sanitize_hex_color',
-        'transport'         => 'refresh',
+        'transport'         => 'postMessage',
     ) );
 
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'pure_secondary_color', array(
-        'label'    => __( 'Secondary Color', 'pure' ),
-        'section'  => 'colors',
-        'settings' => 'pure_secondary_color',
-        'priority' => 20,
+        'label'       => __( 'Secondary Color', 'pure' ),
+        'description' => __( 'Supporting color for text and accents', 'pure' ),
+        'section'     => 'pure_brand_colors',
     ) ) );
     
     // Link Color
     $wp_customize->add_setting( 'pure_link_color', array(
         'default'           => '#0078e7',
         'sanitize_callback' => 'sanitize_hex_color',
-        'transport'         => 'refresh',
+        'transport'         => 'postMessage',
     ) );
 
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'pure_link_color', array(
-        'label'    => __( 'Link Color', 'pure' ),
-        'section'  => 'colors',
-        'settings' => 'pure_link_color',
-        'priority' => 30,
+        'label'       => __( 'Link Color', 'pure' ),
+        'description' => __( 'Color for text links', 'pure' ),
+        'section'     => 'pure_brand_colors',
+    ) ) );
+    
+    // Navigation Colors Section
+    $wp_customize->add_section( 'pure_navigation_colors', array(
+        'title'       => __( 'Navigation Colors', 'pure' ),
+        'description' => __( 'Customize menu appearance', 'pure' ),
+        'panel'       => 'pure_colors_panel',
+        'priority'    => 20,
+    ) );
+    
+    // Menu Background Color
+    $wp_customize->add_setting( 'pure_menu_background_color', array(
+        'default'           => '#ffffff',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'pure_menu_background_color', array(
+        'label'       => __( 'Menu Background', 'pure' ),
+        'description' => __( 'Background color for navigation menu', 'pure' ),
+        'section'     => 'pure_navigation_colors',
+    ) ) );
+    
+    // Menu Text Color
+    $wp_customize->add_setting( 'pure_menu_text_color', array(
+        'default'           => '#333333',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'pure_menu_text_color', array(
+        'label'       => __( 'Menu Text', 'pure' ),
+        'description' => __( 'Text color for menu items', 'pure' ),
+        'section'     => 'pure_navigation_colors',
+    ) ) );
+    
+    // Menu Hover Color
+    $wp_customize->add_setting( 'pure_menu_hover_color', array(
+        'default'           => '#0078e7',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'pure_menu_hover_color', array(
+        'label'       => __( 'Menu Hover/Active', 'pure' ),
+        'description' => __( 'Color for hover and active menu items', 'pure' ),
+        'section'     => 'pure_navigation_colors',
     ) ) );
     
     // ========================================
@@ -500,54 +557,7 @@ function pure_customize_register( $wp_customize ) {
         ),
     ) );
     
-    // Colors Heading
-    $wp_customize->add_setting( 'pure_menu_colors_heading', array(
-        'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    
-    $wp_customize->add_control( new Pure_Heading_Control( $wp_customize, 'pure_menu_colors_heading', array(
-        'label'   => __( 'Colors', 'pure' ),
-        'section' => 'pure_menu_section',
-    ) ) );
-    
-    // Menu Background Color
-    $wp_customize->add_setting( 'pure_menu_background_color', array(
-        'default'           => '#ffffff',
-        'sanitize_callback' => 'sanitize_hex_color',
-        'transport'         => 'postMessage',
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'pure_menu_background_color', array(
-        'label'    => __( 'Background Color', 'pure' ),
-        'section'  => 'pure_menu_section',
-        'settings' => 'pure_menu_background_color',
-    ) ) );
-    
-    // Menu Text Color
-    $wp_customize->add_setting( 'pure_menu_text_color', array(
-        'default'           => '#333333',
-        'sanitize_callback' => 'sanitize_hex_color',
-        'transport'         => 'postMessage',
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'pure_menu_text_color', array(
-        'label'    => __( 'Text Color', 'pure' ),
-        'section'  => 'pure_menu_section',
-        'settings' => 'pure_menu_text_color',
-    ) ) );
-    
-    // Menu Hover Color
-    $wp_customize->add_setting( 'pure_menu_hover_color', array(
-        'default'           => '#000000',
-        'sanitize_callback' => 'sanitize_hex_color',
-        'transport'         => 'postMessage',
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'pure_menu_hover_color', array(
-        'label'    => __( 'Hover Color', 'pure' ),
-        'section'  => 'pure_menu_section',
-        'settings' => 'pure_menu_hover_color',
-    ) ) );
+    // Color settings moved to unified Colors Panel above
 
     // ========================================
     // Footer Section

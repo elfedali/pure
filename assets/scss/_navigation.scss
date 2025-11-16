@@ -82,21 +82,52 @@
 	white-space: nowrap;
 	position: relative;
 	
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0;
+		height: 2px;
+		background: var(--menu-hover-color, #000);
+		transition: width 0.3s ease;
+	}
+	
 	// Root level links need flex to center content
 	.pure-menu__item--root > & {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		
+		&::after {
+			left: 50%;
+			transform: translateX(-50%);
+		}
 	}
 	
 	&:hover,
 	&:focus {
 		color: var(--menu-hover-color, #000);
+		outline: none;
+		
+		&::after {
+			width: 100%;
+		}
 	}
 	
-	&:focus {
-		outline: 2px solid var(--menu-hover-color, #000);
-		outline-offset: 2px;
+	// Active/Current menu item styles - show underline
+	.current-menu-item > &,
+	.current-menu-parent > &,
+	.current-menu-ancestor > &,
+	.current_page_item > &,
+	.current_page_parent > &,
+	.current_page_ancestor > & {
+		color: var(--menu-hover-color, #000);
+		font-weight: 600;
+		
+		&::after {
+			width: 100%;
+		}
 	}
 }
 
@@ -138,22 +169,28 @@
 		margin: 0;
 		display: block;
 		position: relative;
+		padding: 0 1.5rem;
 	}
 	
 	.pure-menu__link {
-		display: block;
-		padding: 0.75rem 1.5rem;
+		display: inline-block;
+		padding: 0.75rem 0;
 		color: var(--menu-text-color, #555);
 		font-size: calc(var(--menu-font-size, 14px) - 1px);
 		text-transform: none;
 		letter-spacing: normal;
 		font-weight: 400;
 		white-space: nowrap;
+	}
+	
+	// Active dropdown items
+	.current-menu-item > .pure-menu__link,
+	.current_page_item > .pure-menu__link {
+		color: var(--menu-hover-color, #000);
+		font-weight: 600;
 		
-		&:hover,
-		&:focus {
-			background: #f9f9f9;
-			color: var(--menu-hover-color, #000);
+		&::after {
+			width: 100%;
 		}
 	}
 }
@@ -233,21 +270,25 @@
 	}
 	
 	.pure-menu__link {
-		display: block;
+		display: inline-block;
 		padding: 0.625rem 0;
 		color: var(--menu-text-color, #666);
 		font-size: calc(var(--menu-font-size, 14px) - 1px);
 		text-transform: none;
 		letter-spacing: 0.25px;
 		font-weight: 400;
-		transition: color 0.2s ease, padding-left 0.2s ease;
 		white-space: normal;
 		line-height: 1.5;
+	}
+	
+	// Active mega menu items
+	.current-menu-item > .pure-menu__link,
+	.current_page_item > .pure-menu__link {
+		color: var(--menu-hover-color, #000);
+		font-weight: 600;
 		
-		&:hover,
-		&:focus {
-			color: var(--menu-hover-color, #000);
-			padding-left: 0.5rem;
+		&::after {
+			width: 100%;
 		}
 	}
 }
