@@ -9,10 +9,15 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<div class="site-container">
-    <header class="site-header">
-        <?php get_template_part( 'template-parts/header/site', 'branding' ); ?>
-        <?php get_template_part( 'template-parts/navigation/navigation', 'primary' ); ?>
-    </header>
+<header class="site-header">
+    <div class="site-header__wrapper">
+        <div class="site-header__container">
+            <?php get_template_part( 'template-parts/header/site', 'branding' ); ?>
+            <?php get_template_part( 'template-parts/navigation/navigation', 'primary' ); ?>
+            <?php get_template_part( 'template-parts/header/header', 'actions' ); ?>
+        </div>
+    </div>
+</header>
 
+<div class="site-container">
     <main class="site-content">

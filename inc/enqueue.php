@@ -67,6 +67,15 @@ function pure_enqueue_assets() {
         return $tag;
     }, 10, 2 );
     
+    // Enqueue menu navigation script
+    wp_enqueue_script(
+        'pure-menu',
+        PURE_URI . '/assets/js/menu.js',
+        array(),
+        PURE_VERSION,
+        true
+    );
+    
     // Enqueue Lucide Icons
     wp_enqueue_script(
         'lucide-icons',
@@ -86,6 +95,17 @@ function pure_enqueue_assets() {
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
     }
+    
+    // Add inline CSS for logo height
+    $logo_height = get_theme_mod( 'pure_logo_height', 50 );
+    
+    $custom_css = "
+        :root {
+            --logo-height: {$logo_height}px;
+        }
+    ";
+    
+    wp_add_inline_style( 'pure-theme', $custom_css );
 }
 add_action( 'wp_enqueue_scripts', 'pure_enqueue_assets' );
 

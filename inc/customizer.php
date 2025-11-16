@@ -438,6 +438,24 @@ function pure_customize_register( $wp_customize ) {
         'section' => 'pure_header_section',
         'type'    => 'checkbox',
     ) );
+    
+    // Logo Height
+    $wp_customize->add_setting( 'pure_logo_height', array(
+        'default'           => 50,
+        'sanitize_callback' => 'absint',
+        'transport'         => 'postMessage',
+    ) );
+
+    $wp_customize->add_control( 'pure_logo_height', array(
+        'label'       => __( 'Logo Height (px)', 'pure' ),
+        'section'     => 'pure_header_section',
+        'type'        => 'range',
+        'input_attrs' => array(
+            'min'  => 30,
+            'max'  => 150,
+            'step' => 5,
+        ),
+    ) );
 
     // ========================================
     // Footer Section
@@ -701,6 +719,56 @@ function pure_customize_register( $wp_customize ) {
     ) );
 }
 add_action( 'customize_register', 'pure_customize_register' );
+
+/**
+ * Customizer live preview script
+ */
+function pure_customizer_live_preview() {
+    wp_enqueue_script(
+        'pure-customizer-preview',
+        PURE_URI . '/assets/js/customizer-preview.js',
+        array( 'customize-preview' ),
+        PURE_VERSION,
+        true
+    );
+}
+add_action( 'customize_preview_init', 'pure_customizer_live_preview' );
+
+/**
+ * Customizer controls script
+ */
+function pure_customizer_controls_scripts() {
+    wp_enqueue_script(
+        'pure-customizer-controls',
+        PURE_URI . '/assets/js/customizer-controls.js',
+        array( 'jquery', 'customize-controls' ),
+        PURE_VERSION,
+        true
+    );
+    
+    // Add inline CSS for range slider styling
+    wp_add_inline_style(
+        'customize-controls',
+        '
+        .customize-control-range .range-value {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 4px 10px;
+            background: #f0f0f1;
+            border-radius: 3px;
+            font-weight: 600;
+            min-width: 40px;
+            text-align: center;
+        }
+        .customize-control-range input[type="range"] {
+            width: calc(100% - 60px);
+            display: inline-block;
+            vertical-align: middle;
+        }
+        '
+    );
+}
+add_action( 'customize_controls_enqueue_scripts', 'pure_customizer_controls_scripts' );
 
 /**
  * Sanitize checkbox

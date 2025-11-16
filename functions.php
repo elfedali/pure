@@ -27,3 +27,5 @@ require_once PURE_DIR . '/inc/customizer.php';         // Customizer options
 require_once PURE_DIR . '/inc/customizer-css.php';     // Customizer CSS output
 require_once PURE_DIR . '/inc/security.php';           // Security enhancements
 require_once PURE_DIR . '/inc/icons.php';              // Icon helper functions
+require_once PURE_DIR . '/inc/class-pure-main-menu-walker.php'; // Custom navigation walker
+require_once PURE_DIR . '/inc/sample-menu.php';        // Sample menu creation
